@@ -13,7 +13,6 @@ exports.download = (template_name,project_dir) => {
         const { url } = config[template_name]; // 模板的下载地址
         const origin_dir = path.join(__dirname, url);
 
-
          // 如果目录非空删除目录内容。如果目录不存在,就创建一个
         await fse.emptyDir(project_dir);
 
@@ -25,16 +24,9 @@ exports.download = (template_name,project_dir) => {
                 return;
             }
             startLoading(); //加载中
-            let executor = exec(`cp -r ${origin_dir} ${project_dir}`);
-            executor.stdout.on('data', (data) => {
-                endLoading(); // 关闭加载中
-                resolve(null);
-                count = 0;
-                console.log('成功生成页面，继续下一步>>>')
-            });
-            executor.stderr.on('data', async (err) => {
-                endLoading(); // 关闭加载中
-                if (err) {
+            let executor = exec(`cp -r ${origin_dir} ${project_dir}`, async (err, stdout, stderr) => {
+                endLoading();
+                if(err) {
                     console.log(err);
                     //出现下载错误,延时3秒重新下载3次
                     console.log("\n下载失败,3s后下载重试...\n");
@@ -43,8 +35,9 @@ exports.download = (template_name,project_dir) => {
                 }else{
                     resolve(null);
                     count = 0;
+                    console.log('创建成功，请到您的文件夹中开始工作吧～～');
                 }
-            })
+            });
         })();
 
     });

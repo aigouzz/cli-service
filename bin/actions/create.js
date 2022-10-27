@@ -38,8 +38,8 @@ async function createProject(appName,options){
 
     try {
         const down = await download(template_name,project_dir);
-        await updatePackage(project_dir,{name:appName,description,template:template_name}); //修改package.json
-        start(project_dir,template_name);// 启动项目    
+        // await updatePackage(project_dir,{name:appName,description,template:template_name}); //修改package.json
+        // start(project_dir,template_name);// 启动项目    
     } catch (error) {
         console.log(error);
     }
