@@ -1,0 +1,20 @@
+{
+  "name": "mycli",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node ./bin/index"
+  },
+  "bin": "./bin/index",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "commander": "^6.1.0",
+    "fs-extra": "^10.0.0",
+    "inquirer": "^7.3.3",
+    "mustache": "^4.2.0",
+    "ora": "^5.1.0"
+  }
+}
